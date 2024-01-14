@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Cleanddit
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @description  Remove some annoying things
 // @author       deibit
 // @license      MIT
 // @match        https://*.reddit.com/*
+// @exclude      https://*.reddit.com/r/*/comments/*
 // @icon         https://reddit.com/favicon.ico
 // @updateURL    https://raw.githubusercontent.com/deibit/cleanddit/main/cleanddit.js
 // @downloadURL  https://raw.githubusercontent.com/deibit/cleanddit/main/cleanddit.js
@@ -14,9 +15,9 @@
 
 function removeElements() {
   let promoted = document.body.getElementsByClassName("promotedlink");
-  for (var i = 0; i < promoted.length; i++)
+  for (var i = 0; i < promoted.length; i++) {
     promoted[i].parentElement.removeChild(promoted[i]);
-
+  }
   const levels = 6;
   let popular = document.body.getElementsByClassName("_1qeIAgB0cPwnLhDF9XSiJM");
   for (i = 0; i < popular.length; i++) {
