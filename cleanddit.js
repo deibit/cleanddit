@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         Cleanddit
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  Remove some annoying things
 // @author       deibit
 // @license      MIT
 // @match        https://*.reddit.com/*
 // @icon         https://reddit.com/favicon.ico
-// @updateURL    https://gist.githubusercontent.com/deibit/0f116f6b29280bad0836a8005116b1c9/raw/11d2f989b3835e31b69331e6f13250e2e8c2bb7f/cleanddit.js
-// @downloadURL  https://gist.githubusercontent.com/deibit/0f116f6b29280bad0836a8005116b1c9/raw/11d2f989b3835e31b69331e6f13250e2e8c2bb7f/cleanddit.js
+// @updateURL    https://raw.githubusercontent.com/deibit/cleanddit/main/cleanddit.js
+// @downloadURL  https://raw.githubusercontent.com/deibit/cleanddit/main/cleanddit.js
 // @grant        none
 // ==/UserScript==
 
