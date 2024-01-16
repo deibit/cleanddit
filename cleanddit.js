@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cleanddit
 // @namespace    http://tampermonkey.net/
-// @version      0.9
+// @version      0.10
 // @description  Remove some annoying things
 // @author       deibit
 // @license      MIT
@@ -26,21 +26,30 @@ function removeElements() {
     }
 
     // Remove non-subscribe related post
-    if (!document.location.href.includes("comments") && false) {
+    const unwanted = ["Popular", "Because", "Similar"];
+
+    if (!document.location.href.includes("comments")) {
+
         const levels = 6;
-        let popular = document.body.getElementsByClassName("_1qeIAgB0cPwnLhDF9XSiJM");
-        for (i = 0; i < popular.length; i++) {
-            let popular_item = popular[i];
+        let popular = Array.from(document.body.getElementsByClassName("_1qeIAgB0cPwnLhDF9XSiJM"));
+        for (var idx=0; idx < popular.length;idx++) console.log(popular[idx].textContent);
+
+        const filter_results = popular.filter(entry => unwanted.some(unwanted_word => entry.textContent.startsWith(unwanted_word)));
+        console.log(filter_results);
+
+
+        for (i = 0; i < filter_results.length; i++) {
+            let item = filter_results[i];
             for (var j = 0; j < levels; j++) {
-                if (popular_item.parentElement) {
-                    popular_item = popular_item.parentElement;
+                if (item.parentElement) {
+                    item = item.parentElement;
                 } else {
                     break;
                 }
             }
-            if (popular_item) {
-                console.log("deleting " + popular_item);
-                popular_item.parentElement.removeChild(popular_item);
+            if (item) {
+                console.log("deleting " + item.textContent);
+                item.parentElement.removeChild(item);
             }
         }
     }
