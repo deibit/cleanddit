@@ -12,4 +12,4 @@ I do not expect anyone to use this script but here is if it serves you.
 
 ## Disclaimer
 
-This script comes with no warranty. It can break your browser experience and I don not recomend you to use it.
+This script comes with no warranty. It can break your browser experience and I do not recomend you to use it.
