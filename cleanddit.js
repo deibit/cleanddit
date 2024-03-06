@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         Cleanddit
 // @namespace    http://tampermonkey.net/
-// @version      0.10
+// @version      0.12
 // @description  Remove some annoying things
 // @author       deibit
 // @license      MIT
 // @match        https://*.reddit.com/*
 // @icon         https://reddit.com/favicon.ico
-// @updateURL    https://raw.githubusercontent.com/deibit/cleanddit/main/cleanddit.js
-// @downloadURL  https://raw.githubusercontent.com/deibit/cleanddit/main/cleanddit.js
 // @grant        none
+// @downloadURL https://update.greasyfork.org/scripts/488408/Cleanddit.user.js
+// @updateURL https://update.greasyfork.org/scripts/488408/Cleanddit.meta.js
 // ==/UserScript==
 
 function removeElements() {
@@ -25,34 +25,25 @@ function removeElements() {
         popups[i].parentElement.removeChild(popups[i]);
     }
 
-    // Remove non-subscribe related post
-    const unwanted = ["Popular", "Because", "Similar"];
 
-    if (!document.location.href.includes("comments")) {
-
-        const levels = 6;
-        let popular = Array.from(document.body.getElementsByClassName("_1qeIAgB0cPwnLhDF9XSiJM"));
-        for (var idx=0; idx < popular.length;idx++) console.log(popular[idx].textContent);
-
-        const filter_results = popular.filter(entry => unwanted.some(unwanted_word => entry.textContent.startsWith(unwanted_word)));
-        console.log(filter_results);
-
-
-        for (i = 0; i < filter_results.length; i++) {
-            let item = filter_results[i];
-            for (var j = 0; j < levels; j++) {
-                if (item.parentElement) {
-                    item = item.parentElement;
-                } else {
-                    break;
-                }
-            }
-            if (item) {
-                console.log("deleting " + item.textContent);
-                item.parentElement.removeChild(item);
+    // Banned
+    let banned_words = ["Popular", "Similar", "Because"];
+    for (let idx = 0; idx < banned_words.length; idx++) {
+        let banned = banned_words[idx];
+        let targets = document.querySelectorAll('[id="-post-rtjson-content"]');
+        for (let i = 0; i < targets.length ; i++) {
+            if (targets[i].childNodes[1].textContent.includes(banned)) {
+                targets[i].parentElement.removeChild(targets[i]);
             }
         }
     }
+
+    // AntiJoin
+    let joins = document.getElementsByTagName("shreddit-join-button");
+    for (let i = 0; i < joins.length; i++) {
+        joins[i].parentElement.parentElement.parentElement.remove();
+    }
+
 
     // Remove "Create Post" popup
     let createPostPopup = document.getElementsByClassName("_3q-XSJ2vokDQrvdG6mR__k");
