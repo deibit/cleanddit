@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cleanddit
 // @namespace    http://tampermonkey.net/
-// @version      0.12
+// @version      0.13
 // @description  Remove some annoying things
 // @author       deibit
 // @license      MIT
@@ -14,20 +14,26 @@
 
 function removeElements() {
     // Remove promoted post
-    let promoted = document.body.getElementsByClassName("promotedlink");
-    for (var i = 0; i < promoted.length; i++) {
+    const promoted = document.body.getElementsByClassName("promotedlink");
+    for (let i = 0; i < promoted.length; i++) {
         promoted[i].parentElement.removeChild(promoted[i]);
     }
 
+    const elements = document.getElementsByTagName('shreddit-dynamic-ad-link');
+    for (let i = 0; i < promoted.length; i++) {
+        promoted[i].parentElement.removeChild(promoted[i]);
+    }
+
+
     // Remove popup for Notifications
-    let popups = document.querySelectorAll('[id^="popup"]');
-    for ( i = 0; i < popups.length; i++) {
+    const popups = document.querySelectorAll('[id^="popup"]');
+    for ( let i = 0; i < popups.length; i++) {
         popups[i].parentElement.removeChild(popups[i]);
     }
 
 
     // Banned
-    let banned_words = ["Popular", "Similar", "Because"];
+    const banned_words = ["Popular", "Similar", "Because"];
     for (let idx = 0; idx < banned_words.length; idx++) {
         let banned = banned_words[idx];
         let targets = document.querySelectorAll('[id="-post-rtjson-content"]');
@@ -39,14 +45,14 @@ function removeElements() {
     }
 
     // AntiJoin
-    let joins = document.getElementsByTagName("shreddit-join-button");
+    const joins = document.getElementsByTagName("shreddit-join-button");
     for (let i = 0; i < joins.length; i++) {
         joins[i].parentElement.parentElement.parentElement.remove();
     }
 
 
     // Remove "Create Post" popup
-    let createPostPopup = document.getElementsByClassName("_3q-XSJ2vokDQrvdG6mR__k");
+    const createPostPopup = document.getElementsByClassName("_3q-XSJ2vokDQrvdG6mR__k");
     if (createPostPopup.length > 0) {
         createPostPopup[0].remove();
     }
