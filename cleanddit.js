@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cleanddit
 // @namespace    http://tampermonkey.net/
-// @version      0.13
+// @version      0.14
 // @description  Remove some annoying things
 // @author       deibit
 // @license      MIT
@@ -19,9 +19,9 @@ function removeElements() {
         promoted[i].parentElement.removeChild(promoted[i]);
     }
 
-    const elements = document.getElementsByTagName('shreddit-dynamic-ad-link');
-    for (let i = 0; i < promoted.length; i++) {
-        promoted[i].parentElement.removeChild(promoted[i]);
+    const elements = document.getElementsByClassName('promoted-label');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].parentElement.removeChild(elements[i]);
     }
 
 
