@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cleanddit
 // @namespace    http://tampermonkey.net/
-// @version      0.14
+// @version      0.15
 // @description  Remove some annoying things
 // @author       deibit
 // @license      MIT
@@ -38,7 +38,7 @@ function removeElements() {
         let banned = banned_words[idx];
         let targets = document.querySelectorAll('[id="-post-rtjson-content"]');
         for (let i = 0; i < targets.length ; i++) {
-            if (targets[i].childNodes[1].textContent.includes(banned)) {
+            if (targets[i].childNodes[0].textContent.includes(banned)) {
                 targets[i].parentElement.removeChild(targets[i]);
             }
         }
